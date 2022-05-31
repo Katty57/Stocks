@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE838B2E2846B68A009E744B /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE838B2D2846B68A009E744B /* Montserrat-Bold.ttf */; };
+		CE838B302846B69D009E744B /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE838B2F2846B69D009E744B /* Montserrat-SemiBold.ttf */; };
 		CEAC0573283E483000C033A9 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC0572283E483000C033A9 /* StockTableViewCell.swift */; };
 		CED838FC283CB2EE00608B2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED838FB283CB2EE00608B2E /* AppDelegate.swift */; };
 		CED83900283CB2EE00608B2E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED838FF283CB2EE00608B2E /* MainScreenViewController.swift */; };
@@ -15,6 +17,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE838B2D2846B68A009E744B /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../../Downloads/Montserrat/static/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		CE838B2F2846B69D009E744B /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.ttf"; path = "../../../../Downloads/Montserrat/static/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CEAC0572283E483000C033A9 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		CED838F8283CB2EE00608B2E /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED838FB283CB2EE00608B2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 				CED838FB283CB2EE00608B2E /* AppDelegate.swift */,
 				CED838FF283CB2EE00608B2E /* MainScreenViewController.swift */,
 				CEAC0572283E483000C033A9 /* StockTableViewCell.swift */,
+				CE838B2F2846B69D009E744B /* Montserrat-SemiBold.ttf */,
+				CE838B2D2846B68A009E744B /* Montserrat-Bold.ttf */,
 				CED83904283CB2F200608B2E /* Assets.xcassets */,
 				CED83906283CB2F200608B2E /* LaunchScreen.storyboard */,
 				CED83909283CB2F200608B2E /* Info.plist */,
@@ -124,6 +130,8 @@
 			files = (
 				CED83908283CB2F200608B2E /* LaunchScreen.storyboard in Resources */,
 				CED83905283CB2F200608B2E /* Assets.xcassets in Resources */,
+				CE838B302846B69D009E744B /* Montserrat-SemiBold.ttf in Resources */,
+				CE838B2E2846B68A009E744B /* Montserrat-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
