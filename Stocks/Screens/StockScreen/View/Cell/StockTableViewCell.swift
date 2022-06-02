@@ -110,8 +110,15 @@ final class StockTableViewCell: UITableViewCell {
     func configure (with stock: Stock) {
         symbolLabel.text = stock.symbol
         companyLabel.text = stock.name
-        priceLabel.text = String(round( 100 * stock.price) / 100)
-        changePriceLabel.text = String(round( 100 * stock.change) / 100) + " " + String(round( 100 * stock.changePercentage) / 100) + "%"
+        priceLabel.text = (stock.price).formattedWithSeparator
+        if (stock.change).sign == .minus {
+            changePriceLabel.textColor = .red
+        } else {
+            changePriceLabel.textColor = UIColor(red: 0.14, green: 0.7, blue: 0.36, alpha: 1.0)
+        }
+        changePriceLabel.text = (stock.change).formattedWithSeparator + " (" + (stock.changePercentage).formattedWithSeparator + "%)"
+//        String(round( 100 * stock.price) / 100)
+//        changePriceLabel.text = String(round( 100 * stock.ch.ange) / 100) + " " + String(round( 100 * stock.changePercentage) / 100) + "%"
     }
     
     private func setUpSubviews () {

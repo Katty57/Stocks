@@ -16,8 +16,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         let mainViewNavControl = UINavigationController(rootViewController: MainScreenViewController())
-
-        window?.rootViewController = mainViewNavControl
+        
+        let tabBar = UITabBarController()
+        tabBar.setViewControllers([mainViewNavControl], animated: false)
+        
+        window?.rootViewController = tabBar
         window?.makeKeyAndVisible()// Override point for customization after application launch.
         return true
     }

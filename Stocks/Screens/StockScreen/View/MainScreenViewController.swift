@@ -41,9 +41,15 @@ final class MainScreenViewController: UIViewController {
         barItem.image = UIImage(named: "diagram")
         self.tabBarItem = barItem
 
+        // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
         setUpSubviews()
         getStocks()
-        // Do any additional setup after loading the view.
     }
     
     func setUpSubviews() {
@@ -71,7 +77,10 @@ final class MainScreenViewController: UIViewController {
         service.getStocks { result in
             switch result {
             case .success(let stocks):
-                self.stocks = stocks
+                self.stocks = stocks.map { stock in
+                    return Stock(id: stock.id, symbol: stock.symbol, name: stock.name, image: stock.image, price: round(stock.price * 100) / 100, change: round(stock.change * 100) / 100, changePercentage: round(stock.changePercentage * 100) / 100)
+                }
+//                self.stocks = stocks
                 self.tableView.reloadData()
             case .failure(let error):
                 print(error)
@@ -92,6 +101,11 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         cell.configure(with: stocks[indexPath.row])
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = DetailsViewController(stock: stocks[indexPath.row])
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
 }
 
 extension NSObject {
@@ -105,7 +119,7 @@ struct Stock: Decodable {
     let symbol: String
     let name: String
     let image: String
-    let price: Double
+    var price: Double
     let change: Double
     let changePercentage: Double
     
@@ -143,3 +157,17 @@ struct Stock: Decodable {
 //    "atl_date":"2013-07-06T00:00:00.000Z",
 //    "roi":null,
 //    "last_updated":"2022-05-27T17:34:14.561Z"}
+
+
+extension Formatter {
+    static let withSeparator: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        return formatter
+    }()
+}
+
+extension Numeric {
+    var formattedWithSeparator: String { Formatter.withSeparator.string(for: self) ?? "" }
+}
