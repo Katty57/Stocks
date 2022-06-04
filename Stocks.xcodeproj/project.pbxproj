@@ -17,6 +17,7 @@
 		CED07400284B855B002AD3C7 /* StockRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED073FF284B855B002AD3C7 /* StockRouter.swift */; };
 		CED07402284B859E002AD3C7 /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED07401284B859E002AD3C7 /* StockModel.swift */; };
 		CED07404284B8EE2002AD3C7 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED07403284B8EE2002AD3C7 /* StockResponse.swift */; };
+		CED0740B284B99DE002AD3C7 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0740A284B99DE002AD3C7 /* ModuleBuilder.swift */; };
 		CED838FC283CB2EE00608B2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED838FB283CB2EE00608B2E /* AppDelegate.swift */; };
 		CED83900283CB2EE00608B2E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED838FF283CB2EE00608B2E /* MainScreenViewController.swift */; };
 		CED83905283CB2F200608B2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED83904283CB2F200608B2E /* Assets.xcassets */; };
@@ -40,6 +41,7 @@
 		CED073FF284B855B002AD3C7 /* StockRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockRouter.swift; sourceTree = "<group>"; };
 		CED07401284B859E002AD3C7 /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
 		CED07403284B8EE2002AD3C7 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
+		CED0740A284B99DE002AD3C7 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
 		CED838F8283CB2EE00608B2E /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED838FB283CB2EE00608B2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CED838FF283CB2EE00608B2E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			isa = PBXGroup;
 			children = (
 				CED073F7284B8498002AD3C7 /* Extension */,
+				CED0740A284B99DE002AD3C7 /* ModuleBuilder.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				CEF78A102840BBD7005906F9 /* HTTPMethod.swift in Sources */,
 				CED073F6284B7A88002AD3C7 /* StocksPresenter.swift in Sources */,
 				CED83900283CB2EE00608B2E /* MainScreenViewController.swift in Sources */,
+				CED0740B284B99DE002AD3C7 /* ModuleBuilder.swift in Sources */,
 				CED07400284B855B002AD3C7 /* StockRouter.swift in Sources */,
 				CEF78A0E2840BBB3005906F9 /* NetworkError.swift in Sources */,
 				CED07402284B859E002AD3C7 /* StockModel.swift in Sources */,

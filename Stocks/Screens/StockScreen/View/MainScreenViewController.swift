@@ -55,10 +55,15 @@ final class MainScreenViewController: UIViewController {
     
     func setUpView () {
         let label = UILabel()
-        label.text = "Stocks"
-        label.textAlignment = .left
-        label.font = UIFont(name: "Montserrat-Bold", size: 28)
-        self.navigationItem.titleView = label
+//        label.text = "Stocks"
+//        label.textAlignment = .left
+//        label.font = UIFont(name: "Montserrat-Bold", size: 28)
+//        self.navigationItem.titleView = label
+        self.navigationItem.title = "Stocks"
+        self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 28)!]
+        self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 16)!]
+        self.navigationItem.largeTitleDisplayMode = .always
+        self.navigationController?.navigationBar.prefersLargeTitles = true
         let barItem = UITabBarItem()
         barItem.image = UIImage(named: "diagram")
         self.tabBarItem = barItem
