@@ -24,6 +24,7 @@ extension StockServiceProtocol {
 }
 
 final class StockService: StockServiceProtocol {
+    
     private let client: NetworkService
     
     init(client: NetworkService) {
@@ -33,6 +34,4 @@ final class StockService: StockServiceProtocol {
     func getStocks(currency: String, count: String, completion: @escaping (Result<[Stock], NetworkError>) -> Void) {
         client.execute(with: StockRouter.stocks(curency: currency, count: count), completion: completion)
     }
-    
-    
 }

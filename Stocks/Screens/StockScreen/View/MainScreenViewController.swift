@@ -54,11 +54,6 @@ final class MainScreenViewController: UIViewController {
     }
     
     func setUpView () {
-        let label = UILabel()
-//        label.text = "Stocks"
-//        label.textAlignment = .left
-//        label.font = UIFont(name: "Montserrat-Bold", size: 28)
-//        self.navigationItem.titleView = label
         self.navigationItem.title = "Stocks"
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 28)!]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 16)!]
@@ -95,15 +90,16 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: StockTableViewCell.typeName, for: indexPath) as! StockTableViewCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: StockTableViewCell.typeName, for: indexPath) as? StockTableViewCell else {return UITableViewCell()}
         cell.getIndex(index: indexPath.row)
         cell.configure(with: presenter.model(for: indexPath))
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let vc = DetailsViewController(stock: presenter.model(for: indexPath))
-//        self.navigationController?.pushViewController(vc, animated: false)
+        let presenter = DetailsPresenter(stock: self.presenter.model(for: indexPath))
+        let vc = DetailsViewController(presenter: presenter)
+        self.navigationController?.pushViewController(vc, animated: false)
     }
 }
 

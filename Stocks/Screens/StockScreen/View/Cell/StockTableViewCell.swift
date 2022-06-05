@@ -42,7 +42,6 @@ final class StockTableViewCell: UITableViewCell {
     
     private lazy var symbolLabel: UILabel = {
         let label = UILabel()
-        label.text = "YNDX"
         label.font = UIFont(name: "Montserrat-Bold", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -50,7 +49,6 @@ final class StockTableViewCell: UITableViewCell {
     
     private lazy var companyLabel: UILabel = {
         let label = UILabel()
-        label.text = "Yandex, LLC"
         label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -58,23 +56,19 @@ final class StockTableViewCell: UITableViewCell {
     
     private lazy var favouriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Path"), for: .normal)
+        button.setImage(UIImage(named: "star_off"), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var infoView: UIView = {
         let view = UIView()
-        view.addSubview(symbolLabel)
-        view.addSubview(companyLabel)
-        view.addSubview(favouriteButton)
+        [symbolLabel, companyLabel, favouriteButton].forEach { view.addSubview($0) }
         return view
     }()
     
     private lazy var priceLabel: UILabel = {
         let label = UILabel()
-        label.text = "4 764,6₽"
-        label.textAlignment = .left
         label.font = UIFont(name: "Montserrat-Bold", size: 18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -82,10 +76,8 @@ final class StockTableViewCell: UITableViewCell {
     
     private lazy var changePriceLabel: UILabel = {
         let label = UILabel()
-        label.text = "+55₽ (1,15%)"
         label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
         label.textColor = UIColor(red: 0.14, green: 0.7, blue: 0.36, alpha: 1.0)
-        label.textAlignment = .left
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -100,7 +92,7 @@ final class StockTableViewCell: UITableViewCell {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.setUpSubviews()
+        setUpSubviews()
     }
     
     required init?(coder: NSCoder) {
@@ -113,8 +105,6 @@ final class StockTableViewCell: UITableViewCell {
         priceLabel.text = model.price
         changePriceLabel.text = model.change
         changePriceLabel.textColor = model.changeColor
-//        String(round( 100 * stock.price) / 100)
-//        changePriceLabel.text = String(round( 100 * stock.ch.ange) / 100) + " " + String(round( 100 * stock.changePercentage) / 100) + "%"
     }
     
     private func setUpSubviews () {
@@ -158,16 +148,4 @@ final class StockTableViewCell: UITableViewCell {
             changePriceLabel.trailingAnchor.constraint(equalTo: priceLabel.trailingAnchor)
         ])
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-    }
-
 }

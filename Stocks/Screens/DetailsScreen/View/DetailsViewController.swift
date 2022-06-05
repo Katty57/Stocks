@@ -9,7 +9,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
-    var stock: Stock
+    var presenter: DetailsPresenterProtocol
 
     private lazy var navBarTitleView: UIView = {
         let view = UIView()
@@ -20,7 +20,6 @@ class DetailsViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Montserrat-Bold", size: 18)
-        label.text = stock.symbol
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -28,7 +27,6 @@ class DetailsViewController: UIViewController {
     private lazy var companyLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
-        label.text = stock.name
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -48,6 +46,7 @@ class DetailsViewController: UIViewController {
             
             titleView.heightAnchor.constraint(equalToConstant: 44)
         ])
+        navigationItem.titleView = titleView
         return titleView
     }()
     
@@ -55,7 +54,6 @@ class DetailsViewController: UIViewController {
         let label = UILabel()
         label.font = UIFont(name: "Montserrat-Bold", size: 28)
         label.textColor = .black
-        label.text = (stock.price).formattedWithSeparator
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -63,12 +61,6 @@ class DetailsViewController: UIViewController {
     private lazy var changeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
-        if (stock.change).sign == .minus {
-            label.textColor = .red
-        } else {
-            label.textColor = UIColor(red: 0.14, green: 0.7, blue: 0.36, alpha: 1.0)
-        }
-        label.text = (stock.change).formattedWithSeparator + " (" + (stock.changePercentage).formattedWithSeparator + "%)"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -130,14 +122,14 @@ class DetailsViewController: UIViewController {
     }()
     
     private lazy var buyButton: UIButton = {
-        let button = createCustomButton(title: "Buy for ", size: 16, textColor: .white, cornerRadius: 16)
+        let button = createCustomButton(title: "Buy for " + presenter.stock.price, size: 16, textColor: .white, buttonColor: .black, cornerRadius: 16)
         button.backgroundColor = .black
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    init(stock: Stock) {
-        self.stock = stock
+    init(presenter: DetailsPresenterProtocol) {
+        self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -148,7 +140,15 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        setUpView()
+        setUpSubviews()
+        presenter.loadView()
+        configure()
+        // Do any additional setup after loading the view.
+    }
+    
+    func setUpView () {
         view.backgroundColor = .white
         self.tabBarController?.tabBar.isHidden = true
         
@@ -159,11 +159,14 @@ class DetailsViewController: UIViewController {
         let rightBarButton = UIBarButtonItem(image: UIImage(named: "star"), style: .plain, target: self, action: #selector(addToFavourite))
         self.navigationItem.rightBarButtonItem = rightBarButton
         self.navigationItem.rightBarButtonItem?.tintColor = .black
-        
-        self.navigationItem.titleView = titleView
-        
-        setUpSubviews()
-        // Do any additional setup after loading the view.
+    }
+    
+    func configure () {
+        titleLabel.text = presenter.stock.symbol
+        companyLabel.text = presenter.stock.name
+        priceLabel.text = presenter.stock.price
+        changeLabel.text = presenter.stock.change
+        changeLabel.textColor = presenter.stock.changeColor
     }
     
     @objc func timeButtonChoosed(_ sender: UIButton) {
@@ -177,9 +180,11 @@ class DetailsViewController: UIViewController {
         label?.textColor = .white
     }
     
-    func createCustomButton(title: String, size: CGFloat = 12, textColor: UIColor = .black, cornerRadius: CGFloat = 12) -> UIButton {
+    func createCustomButton(title: String, size: CGFloat = 12, textColor: UIColor = .black,
+                            buttonColor: UIColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0),
+                            cornerRadius: CGFloat = 12) -> UIButton {
         let button = UIButton()
-        button.backgroundColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
+        button.backgroundColor = buttonColor
         button.layer.cornerRadius = cornerRadius
         button.clipsToBounds = true
         
@@ -200,10 +205,7 @@ class DetailsViewController: UIViewController {
     }
     
     func setUpSubviews() {
-        view.addSubview(priceView)
-        view.addSubview(graphView)
-        view.addSubview(timeButtonView)
-        view.addSubview(buyButton)
+        [priceView, graphView, timeButtonView, buyButton].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
             priceView.topAnchor.constraint(equalTo: view.topAnchor, constant: 162),
@@ -235,16 +237,20 @@ class DetailsViewController: UIViewController {
     @objc func addToFavourite(_ sender: UIBarButtonItem) {
         
     }
-    
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension DetailsViewController: DetailsViewProtocol {
+    func updateView() {
     }
-    */
-
+    
+    func updateView(withLoader isLoading: Bool) {
+        
+    }
+    
+    func updateView(withError message: String) {
+        
+    }
+    
+    
 }

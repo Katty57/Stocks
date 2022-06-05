@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3CB310284CC87D00B189A9 /* DetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB30F284CC87D00B189A9 /* DetailsResponse.swift */; };
 		CE4214FA28478FA600952057 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4214F928478FA600952057 /* Montserrat-Bold.ttf */; };
 		CE4214FC28478FD800952057 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4214FB28478FD800952057 /* Montserrat-SemiBold.ttf */; };
 		CEAC0573283E483000C033A9 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC0572283E483000C033A9 /* StockTableViewCell.swift */; };
@@ -18,6 +19,8 @@
 		CED07402284B859E002AD3C7 /* StockModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED07401284B859E002AD3C7 /* StockModel.swift */; };
 		CED07404284B8EE2002AD3C7 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED07403284B8EE2002AD3C7 /* StockResponse.swift */; };
 		CED0740B284B99DE002AD3C7 /* ModuleBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0740A284B99DE002AD3C7 /* ModuleBuilder.swift */; };
+		CED0740E284BCEED002AD3C7 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0740D284BCEED002AD3C7 /* DetailsPresenter.swift */; };
+		CED07410284BEA10002AD3C7 /* DetailsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED0740F284BEA10002AD3C7 /* DetailsService.swift */; };
 		CED838FC283CB2EE00608B2E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED838FB283CB2EE00608B2E /* AppDelegate.swift */; };
 		CED83900283CB2EE00608B2E /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED838FF283CB2EE00608B2E /* MainScreenViewController.swift */; };
 		CED83905283CB2F200608B2E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CED83904283CB2F200608B2E /* Assets.xcassets */; };
@@ -31,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE3CB30F284CC87D00B189A9 /* DetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsResponse.swift; sourceTree = "<group>"; };
 		CE4214F928478FA600952057 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../../../Downloads/Montserrat/static/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		CE4214FB28478FD800952057 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.ttf"; path = "../../../../../Downloads/Montserrat/static/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CEAC0572283E483000C033A9 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
@@ -42,6 +46,8 @@
 		CED07401284B859E002AD3C7 /* StockModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockModel.swift; sourceTree = "<group>"; };
 		CED07403284B8EE2002AD3C7 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
 		CED0740A284B99DE002AD3C7 /* ModuleBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleBuilder.swift; sourceTree = "<group>"; };
+		CED0740D284BCEED002AD3C7 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
+		CED0740F284BEA10002AD3C7 /* DetailsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsService.swift; sourceTree = "<group>"; };
 		CED838F8283CB2EE00608B2E /* Stocks.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Stocks.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CED838FB283CB2EE00608B2E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CED838FF283CB2EE00608B2E /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
@@ -67,6 +73,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3CB30E284CC86300B189A9 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				CE3CB30F284CC87D00B189A9 /* DetailsResponse.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		CE4214FD2847994C00952057 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -168,6 +182,22 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		CED0740C284BCED1002AD3C7 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CED0740D284BCEED002AD3C7 /* DetailsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		CED07411284BED5D002AD3C7 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CED0740F284BEA10002AD3C7 /* DetailsService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		CED838EF283CB2EE00608B2E = {
 			isa = PBXGroup;
 			children = (
@@ -219,6 +249,9 @@
 		CEF78A3628415844005906F9 /* DetailsScreen */ = {
 			isa = PBXGroup;
 			children = (
+				CE3CB30E284CC86300B189A9 /* Model */,
+				CED07411284BED5D002AD3C7 /* Service */,
+				CED0740C284BCED1002AD3C7 /* Presenter */,
 				CEF78A3728415852005906F9 /* View */,
 			);
 			path = DetailsScreen;
@@ -304,11 +337,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CED07410284BEA10002AD3C7 /* DetailsService.swift in Sources */,
 				CED073FA284B84BB002AD3C7 /* NSObject+Ext.swift in Sources */,
 				CED07404284B8EE2002AD3C7 /* StockResponse.swift in Sources */,
 				CEF78A0C2840BB8B005906F9 /* NetworkService.swift in Sources */,
 				CEF78A0A2840BB60005906F9 /* Router.swift in Sources */,
 				CEF78A392841586F005906F9 /* DetailsViewController.swift in Sources */,
+				CE3CB310284CC87D00B189A9 /* DetailsResponse.swift in Sources */,
 				CEF78A142840C2E9005906F9 /* StockService.swift in Sources */,
 				CED073FE284B850C002AD3C7 /* Numeric+Ext.swift in Sources */,
 				CEF78A102840BBD7005906F9 /* HTTPMethod.swift in Sources */,
@@ -321,6 +356,7 @@
 				CEAC0573283E483000C033A9 /* StockTableViewCell.swift in Sources */,
 				CED073FC284B84F7002AD3C7 /* Formatter+Ext.swift in Sources */,
 				CED838FC283CB2EE00608B2E /* AppDelegate.swift in Sources */,
+				CED0740E284BCEED002AD3C7 /* DetailsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
