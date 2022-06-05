@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE3CB312284CD1BB00B189A9 /* StockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB311284CD1BB00B189A9 /* StockResponse.swift */; };
+		CE3CB316284CD1F500B189A9 /* NSObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB315284CD1F500B189A9 /* NSObject+Ext.swift */; };
+		CE3CB318284CD21000B189A9 /* Formatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB317284CD21000B189A9 /* Formatter+Ext.swift */; };
+		CE3CB31A284CD22E00B189A9 /* Numeric+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB319284CD22E00B189A9 /* Numeric+Ext.swift */; };
 		CE4214FA28478FA600952057 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4214F928478FA600952057 /* Montserrat-Bold.ttf */; };
 		CE4214FC28478FD800952057 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4214FB28478FD800952057 /* Montserrat-SemiBold.ttf */; };
 		CEAC0573283E483000C033A9 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC0572283E483000C033A9 /* StockTableViewCell.swift */; };
@@ -23,6 +27,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE3CB311284CD1BB00B189A9 /* StockResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockResponse.swift; sourceTree = "<group>"; };
+		CE3CB315284CD1F500B189A9 /* NSObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ext.swift"; sourceTree = "<group>"; };
+		CE3CB317284CD21000B189A9 /* Formatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Ext.swift"; sourceTree = "<group>"; };
+		CE3CB319284CD22E00B189A9 /* Numeric+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Numeric+Ext.swift"; sourceTree = "<group>"; };
 		CE4214F928478FA600952057 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../../../Downloads/Montserrat/static/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		CE4214FB28478FD800952057 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.ttf"; path = "../../../../../Downloads/Montserrat/static/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CEAC0572283E483000C033A9 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
@@ -51,6 +59,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE3CB313284CD1D600B189A9 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				CE3CB314284CD1DA00B189A9 /* Extension */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		CE3CB314284CD1DA00B189A9 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				CE3CB315284CD1F500B189A9 /* NSObject+Ext.swift */,
+				CE3CB317284CD21000B189A9 /* Formatter+Ext.swift */,
+				CE3CB319284CD22E00B189A9 /* Numeric+Ext.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		CE4214FD2847994C00952057 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +175,7 @@
 		CED838FA283CB2EE00608B2E /* Stocks */ = {
 			isa = PBXGroup;
 			children = (
+				CE3CB313284CD1D600B189A9 /* Core */,
 				CE49720D2840133C007BB7CA /* Screens */,
 				CE49720C28400BC1007BB7CA /* Application */,
 				CED83906283CB2F200608B2E /* LaunchScreen.storyboard */,
@@ -172,6 +199,7 @@
 			isa = PBXGroup;
 			children = (
 				CEF78A132840C2E9005906F9 /* StockService.swift */,
+				CE3CB311284CD1BB00B189A9 /* StockResponse.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -264,14 +292,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE3CB316284CD1F500B189A9 /* NSObject+Ext.swift in Sources */,
 				CEF78A0C2840BB8B005906F9 /* NetworkService.swift in Sources */,
 				CEF78A0A2840BB60005906F9 /* Router.swift in Sources */,
 				CEF78A392841586F005906F9 /* DetailsViewController.swift in Sources */,
+				CE3CB312284CD1BB00B189A9 /* StockResponse.swift in Sources */,
+				CE3CB31A284CD22E00B189A9 /* Numeric+Ext.swift in Sources */,
 				CEF78A142840C2E9005906F9 /* StockService.swift in Sources */,
 				CEF78A102840BBD7005906F9 /* HTTPMethod.swift in Sources */,
 				CED83900283CB2EE00608B2E /* MainScreenViewController.swift in Sources */,
 				CEF78A0E2840BBB3005906F9 /* NetworkError.swift in Sources */,
 				CEAC0573283E483000C033A9 /* StockTableViewCell.swift in Sources */,
+				CE3CB318284CD21000B189A9 /* Formatter+Ext.swift in Sources */,
 				CED838FC283CB2EE00608B2E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

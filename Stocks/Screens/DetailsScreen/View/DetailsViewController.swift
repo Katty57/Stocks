@@ -200,10 +200,7 @@ class DetailsViewController: UIViewController {
     }
     
     func setUpSubviews() {
-        view.addSubview(priceView)
-        view.addSubview(graphView)
-        view.addSubview(timeButtonView)
-        view.addSubview(buyButton)
+        [priceView, graphView, timeButtonView, buyButton].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
             priceView.topAnchor.constraint(equalTo: view.topAnchor, constant: 162),
@@ -235,16 +232,5 @@ class DetailsViewController: UIViewController {
     @objc func addToFavourite(_ sender: UIBarButtonItem) {
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
