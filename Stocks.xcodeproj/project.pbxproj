@@ -11,6 +11,7 @@
 		CE4214FA28478FA600952057 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4214F928478FA600952057 /* Montserrat-Bold.ttf */; };
 		CE4214FC28478FD800952057 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE4214FB28478FD800952057 /* Montserrat-SemiBold.ttf */; };
 		CE70AE1D284E6C760059AF0C /* FavoritesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE70AE1C284E6C760059AF0C /* FavoritesService.swift */; };
+		CE70AE27284E8D600059AF0C /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE70AE26284E8D600059AF0C /* FavoritesTableViewController.swift */; };
 		CEAC0573283E483000C033A9 /* StockTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEAC0572283E483000C033A9 /* StockTableViewCell.swift */; };
 		CED073F6284B7A88002AD3C7 /* StocksPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED073F5284B7A88002AD3C7 /* StocksPresenter.swift */; };
 		CED073FA284B84BB002AD3C7 /* NSObject+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CED073F9284B84BB002AD3C7 /* NSObject+Ext.swift */; };
@@ -39,6 +40,7 @@
 		CE4214F928478FA600952057 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "../../../../../Downloads/Montserrat/static/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		CE4214FB28478FD800952057 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-SemiBold.ttf"; path = "../../../../../Downloads/Montserrat/static/Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		CE70AE1C284E6C760059AF0C /* FavoritesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesService.swift; sourceTree = "<group>"; };
+		CE70AE26284E8D600059AF0C /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
 		CEAC0572283E483000C033A9 /* StockTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StockTableViewCell.swift; sourceTree = "<group>"; };
 		CED073F5284B7A88002AD3C7 /* StocksPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StocksPresenter.swift; sourceTree = "<group>"; };
 		CED073F9284B84BB002AD3C7 /* NSObject+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+Ext.swift"; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		CE49720D2840133C007BB7CA /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CE70AE24284E8D3D0059AF0C /* FavoritesScreen */,
 				CEF78A3628415844005906F9 /* DetailsScreen */,
 				CE49720F284013B6007BB7CA /* StockScreen */,
 			);
@@ -171,6 +174,22 @@
 				CE70AE1C284E6C760059AF0C /* FavoritesService.swift */,
 			);
 			path = FavoritesService;
+			sourceTree = "<group>";
+		};
+		CE70AE24284E8D3D0059AF0C /* FavoritesScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CE70AE25284E8D4C0059AF0C /* View */,
+			);
+			path = FavoritesScreen;
+			sourceTree = "<group>";
+		};
+		CE70AE25284E8D4C0059AF0C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE70AE26284E8D600059AF0C /* FavoritesTableViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		CED073F7284B8498002AD3C7 /* Extension */ = {
@@ -353,6 +372,7 @@
 				CED073FA284B84BB002AD3C7 /* NSObject+Ext.swift in Sources */,
 				CED07404284B8EE2002AD3C7 /* StockResponse.swift in Sources */,
 				CEF78A0C2840BB8B005906F9 /* NetworkService.swift in Sources */,
+				CE70AE27284E8D600059AF0C /* FavoritesTableViewController.swift in Sources */,
 				CEF78A0A2840BB60005906F9 /* Router.swift in Sources */,
 				CEF78A392841586F005906F9 /* DetailsViewController.swift in Sources */,
 				CE3CB310284CC87D00B189A9 /* DetailsResponse.swift in Sources */,

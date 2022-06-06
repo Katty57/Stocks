@@ -59,9 +59,6 @@ final class MainScreenViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 16)!]
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationController?.navigationBar.prefersLargeTitles = true
-        let barItem = UITabBarItem()
-        barItem.image = UIImage(named: "diagram")
-        self.tabBarItem = barItem
     }
     
     func setUpSubviews() {

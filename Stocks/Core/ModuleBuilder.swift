@@ -35,12 +35,28 @@ class ModuleBuilder {
         return view
     }
     
+    private func favoriteModule () -> UIViewController {
+        let presenter = StocksPresenter(service: stockService())
+        let view = FavoritesTableViewController(presenter: presenter)
+        presenter.view = view as? StocksViewProtocol
+        
+        return view
+    }
+    
     func tabBarController () -> UITabBarController {
         let tabBar = UITabBarController()
         
         let mainViewNavControl = UINavigationController(rootViewController: stockModule())
+        let favoriteViewNavControl = UINavigationController(rootViewController: favoriteModule())
         
-        tabBar.viewControllers = [mainViewNavControl]
+        let mainBarItem = UITabBarItem()
+        mainBarItem.image = UIImage(named: "diagram")
+        let favoriteItem = UITabBarItem()
+        favoriteItem.image = UIImage(named: "star")
+        
+        tabBar.viewControllers = [mainViewNavControl, favoriteViewNavControl]
+        mainViewNavControl.tabBarItem = mainBarItem
+        favoriteViewNavControl.tabBarItem = favoriteItem
         
         return tabBar
     }

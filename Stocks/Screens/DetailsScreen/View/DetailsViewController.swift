@@ -10,6 +10,8 @@ import UIKit
 class DetailsViewController: UIViewController {
     
     var presenter: DetailsPresenterProtocol
+    
+    let favoriteService: FavoriteServiceProtocol = ModuleBuilder.shared.favoriteService
 
     private lazy var navBarTitleView: UIView = {
         let view = UIView()
@@ -167,6 +169,7 @@ class DetailsViewController: UIViewController {
         priceLabel.text = presenter.stock.price
         changeLabel.text = presenter.stock.change
         changeLabel.textColor = presenter.stock.changeColor
+        navigationItem.rightBarButtonItem?.tintColor = favoriteService.isFavorite(id: presenter.stock.id) ? .yellow : .lightGray
     }
     
     @objc func timeButtonChoosed(_ sender: UIButton) {
@@ -235,6 +238,8 @@ class DetailsViewController: UIViewController {
     }
     
     @objc func addToFavorite(_ sender: UIBarButtonItem) {
+        presenter.stock.setFavorite()
+        navigationItem.rightBarButtonItem?.tintColor = favoriteService.isFavorite(id: presenter.stock.id) ? .yellow : .lightGray
     }
 
 }
