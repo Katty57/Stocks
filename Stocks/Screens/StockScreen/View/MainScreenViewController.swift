@@ -96,6 +96,8 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let presenter = DetailsPresenter(stock: self.presenter.model(for: indexPath))
         let vc = DetailsViewController(presenter: presenter)
+        presenter.view = vc
+        
         self.navigationController?.pushViewController(vc, animated: false)
     }
 }

@@ -11,6 +11,7 @@ protocol DetailsViewProtocol: AnyObject {
     func updateView ()
     func updateView (withLoader isLoading: Bool)
     func updateView(withError message: String)
+    func updateView (with details: DetailsModel)
 }
 
 protocol DetailsPresenterProtocol {
@@ -36,9 +37,10 @@ final class DetailsPresenter: DetailsPresenterProtocol {
         view?.updateView(withLoader: true)
         service.getDetails(id: stock.id) { [weak self] result in
             switch result {
-            case .success(_):
+            case .success(let details):
+//                Stocks.Details.Value(date: 54368-01-25 00:00:00 +0000, price: 29584.949851985926)
                 self?.view?.updateView(withLoader: false)
-                self?.view?.updateView()
+                self?.view?.updateView(with: .build(from: details))
             case .failure(let error):
                 print(error)
             }
