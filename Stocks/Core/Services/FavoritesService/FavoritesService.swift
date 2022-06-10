@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 protocol FavoriteServiceProtocol {
-    func save (id: String)
-    func remove (id: String)
-    func isFavorite (id: String) -> Bool
-    func getFavouriteIds () -> [String]
+    func save(id: String)
+    func remove(id: String)
+    func isFavorite(id: String) -> Bool
+    func getFavouriteIds() -> [String]
 }
 
 final class FavoriteService: FavoriteServiceProtocol {
@@ -47,7 +47,11 @@ final class FavoriteService: FavoriteServiceProtocol {
         }
     }
     
-    private func updateRepo (with id: String) {
+    func getFavouriteIds() -> [String] {
+        return favoriteIds
+    }
+    
+    private func updateRepo(with id: String) {
         do {
             let data = try JSONEncoder().encode(favoriteIds)
             try data.write(to: path)
@@ -55,9 +59,5 @@ final class FavoriteService: FavoriteServiceProtocol {
         } catch {
             print("FileManager WriteError - ", error.localizedDescription)
         }
-    }
-    
-    func getFavouriteIds() -> [String] {
-        return favoriteIds
     }
 }

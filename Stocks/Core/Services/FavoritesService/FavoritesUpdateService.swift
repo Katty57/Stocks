@@ -8,11 +8,11 @@
 import Foundation
 
 @objc protocol FavoritesUpdateServiceProtocol {
-    func setFavourite (notification: Notification)
+    func setFavourite(notification: Notification)
 }
 
 extension FavoritesUpdateServiceProtocol {
-    func startFavouritesNotificationObserving () {
+    func startFavouritesNotificationObserving() {
         NotificationCenter.default.addObserver(self, selector: #selector(setFavourite), name: Notification.Name.favouritesNotification, object: nil)
     }
 }

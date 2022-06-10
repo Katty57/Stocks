@@ -7,8 +7,6 @@
 
 import Foundation
 
-//https://api.coingecko.com/api/v3/coins/[ID]/market_chart?vs_currency=usd&days=600&interval=daily
-
 enum StockRouter: Router {
     case stocks(curency: String, count: String)
     case id(id: String, currency: String, days: String, interval: String)

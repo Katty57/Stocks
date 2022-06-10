@@ -38,22 +38,27 @@ final class MainScreenViewController: UIViewController {
         return view
     }()
     
+    private lazy var loader: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setUpView()
-        presenter.loadView()
         setUpSubviews() 
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
+        presenter.loadView()
     }
     
-    func setUpView () {
+    private func setUpView() {
         self.navigationItem.title = "Stocks"
         self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-Bold", size: 28)!]
         self.navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.font : UIFont(name: "Montserrat-SemiBold", size: 16)!]
@@ -61,9 +66,10 @@ final class MainScreenViewController: UIViewController {
         self.navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    func setUpSubviews() {
+    private func setUpSubviews() {
         view.addSubview(spaceTableView)
         spaceTableView.addSubview(tableView)
+        view.addSubview(loader)
         
         NSLayoutConstraint.activate([
             spaceTableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -74,11 +80,12 @@ final class MainScreenViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: spaceTableView.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: spaceTableView.leadingAnchor, constant: 16.0),
             tableView.trailingAnchor.constraint(equalTo: spaceTableView.trailingAnchor, constant: -16.0),
-            tableView.bottomAnchor.constraint(equalTo: spaceTableView.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: spaceTableView.bottomAnchor),
             
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-
 }
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
@@ -97,7 +104,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let presenter = DetailsPresenter(stock: self.presenter.model(for: indexPath))
         let vc = DetailsViewController(presenter: presenter)
         presenter.view = vc
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(vc, animated: false)
     }
 }
@@ -112,11 +119,16 @@ extension MainScreenViewController: StocksViewProtocol {
     }
     
     func updateView(withLoader isLoading: Bool) {
-        
+        isLoading ? loader.startAnimating() : loader.stopAnimating()
     }
     
     func updateView(withError message: String) {
-        
+        let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                    
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+        errorAlert.addAction(ok)
+        self.present(errorAlert, animated: true, completion: nil)
     }
 }
 

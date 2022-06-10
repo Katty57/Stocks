@@ -7,9 +7,9 @@
 
 import UIKit
 
-class FavoritesTableViewController: UIViewController {
+final class FavoritesTableViewController: UIViewController {
     
-    private let presenter: StocksPresenterProtocol
+    private let presenter: FavoritesPresenterProtocol
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -26,16 +26,14 @@ class FavoritesTableViewController: UIViewController {
         view.backgroundColor = .white
         return view
     }()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        setUpView()
-        presenter.loadView()
-        setUpSubviews()
-    }
     
-    init(presenter: StocksPresenterProtocol) {
+    private lazy var loader: UIActivityIndicatorView = {
+        let view = UIActivityIndicatorView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+
+    init(presenter: FavoritesPresenterProtocol) {
         self.presenter = presenter
         
         super.init(nibName: nil, bundle: nil)
@@ -45,7 +43,21 @@ class FavoritesTableViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setUpView () {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        setUpView()
+        setUpSubviews()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.tabBarController?.tabBar.isHidden = false
+        presenter.loadView()
+    }
+    
+    private func setUpView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.separatorStyle = .none
         
@@ -56,15 +68,10 @@ class FavoritesTableViewController: UIViewController {
         navigationController?.navigationBar.prefersLargeTitles = true
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    
-    func setUpSubviews() {
+    private func setUpSubviews() {
         view.addSubview(spaceTableView)
         spaceTableView.addSubview(tableView)
+        view.addSubview(loader)
         
         NSLayoutConstraint.activate([
             spaceTableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -75,8 +82,10 @@ class FavoritesTableViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: spaceTableView.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: spaceTableView.leadingAnchor, constant: 16.0),
             tableView.trailingAnchor.constraint(equalTo: spaceTableView.trailingAnchor, constant: -16.0),
-            tableView.bottomAnchor.constraint(equalTo: spaceTableView.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: spaceTableView.bottomAnchor),
             
+            loader.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -95,21 +104,21 @@ extension FavoritesTableViewController: UITableViewDataSource {
     }
 }
 
-extension FavoritesTableViewController: StocksViewProtocol {
-    func updateCell(for indexPath: IndexPath) {
-        
-    }
-    
+extension FavoritesTableViewController: FavouritesViewProtocol {
     func updateView() {
-        
         tableView.reloadData()
     }
     
     func updateView(withLoader isLoading: Bool) {
-        
+        isLoading ? loader.startAnimating() : loader.stopAnimating()
     }
     
     func updateView(withError message: String) {
-        
+        let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                    
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+        errorAlert.addAction(ok)
+        self.present(errorAlert, animated: true, completion: nil)
     }
 }

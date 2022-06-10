@@ -8,7 +8,7 @@
 import UIKit
 import Charts
 
-class DetailsViewController: UIViewController {
+final class DetailsViewController: UIViewController {
     
     var presenter: DetailsPresenterProtocol
     
@@ -51,7 +51,6 @@ class DetailsViewController: UIViewController {
             
             titleView.heightAnchor.constraint(equalToConstant: 44)
         ])
-        navigationItem.titleView = titleView
         return titleView
     }()
     
@@ -102,7 +101,7 @@ class DetailsViewController: UIViewController {
     
     private lazy var timeButtonView: UIStackView = {
         let stackView   = UIStackView()
-        stackView.axis  = NSLayoutConstraint.Axis.horizontal
+        stackView.axis  = .horizontal
         stackView.distribution  = UIStackView.Distribution.fillEqually
         stackView.alignment = UIStackView.Alignment.fill
         stackView.spacing   = 10.0
@@ -159,25 +158,26 @@ class DetailsViewController: UIViewController {
         
         setUpView()
         setUpSubviews()
-        presenter.loadView()
         configure()
-        // Do any additional setup after loading the view.
+        presenter.loadView()
     }
     
-    func setUpView () {
+    private func setUpView() {
         view.backgroundColor = .white
         self.tabBarController?.tabBar.isHidden = true
+        
+        navigationItem.titleView = titleView
         
         let leftBarButton = UIBarButtonItem(image: UIImage(named: "backButton"), style: .plain, target: self, action: #selector(popToPrevious))
         self.navigationItem.leftBarButtonItem = leftBarButton
         self.navigationItem.leftBarButtonItem?.tintColor = .black
         
-        let rightBarButton = UIBarButtonItem(image: UIImage(named: "star"), style: .plain, target: self, action: #selector(addToFavorite))
+        let rightBarButton = UIBarButtonItem(image: UIImage(named: "star_off"), style: .plain, target: self, action: #selector(addToFavorite))
         self.navigationItem.rightBarButtonItem = rightBarButton
         self.navigationItem.rightBarButtonItem?.tintColor = .black
     }
     
-    func configure () {
+    private func configure() {
         titleLabel.text = presenter.stock.symbol
         companyLabel.text = presenter.stock.name
         priceLabel.text = presenter.stock.price
@@ -186,7 +186,7 @@ class DetailsViewController: UIViewController {
         navigationItem.rightBarButtonItem?.tintColor = favoriteService.isFavorite(id: presenter.stock.id) ? .yellow : .lightGray
     }
     
-    func updateGraph (with details: DetailsModel) {
+    private func updateGraph(with details: DetailsModel) {
         guard let periodIndex = periodIndex else {
             return
         }
@@ -194,9 +194,9 @@ class DetailsViewController: UIViewController {
         showChart(with: details.periods[periodIndex])
     }
     
-    @objc func timeButtonChoosed(_ sender: UIButton) {
+    @objc private func timeButtonChoosed(_ sender: UIButton) {
         timeButtonView.arrangedSubviews.forEach {
-            $0.backgroundColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
+            $0.backgroundColor = UIColor.DetailsViewController.timeButtonColor
             let label = $0.subviews.first as? UILabel
             label?.textColor = .black
         }
@@ -207,8 +207,8 @@ class DetailsViewController: UIViewController {
         presenter.loadView()
     }
     
-    func createCustomButton(title: String, size: CGFloat = 12, textColor: UIColor = .black,
-                            buttonColor: UIColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0),
+    private func createCustomButton(title: String, size: CGFloat = 12, textColor: UIColor = .black,
+                            buttonColor: UIColor = UIColor.DetailsViewController.timeButtonColor,
                             cornerRadius: CGFloat = 12) -> UIButton {
         let button = UIButton()
         button.backgroundColor = buttonColor
@@ -231,7 +231,7 @@ class DetailsViewController: UIViewController {
         return button
     }
     
-    func setUpSubviews() {
+    private func setUpSubviews() {
         [priceView, graphView, timeButtonView, buyButton].forEach { view.addSubview($0) }
         
         NSLayoutConstraint.activate([
@@ -253,7 +253,6 @@ class DetailsViewController: UIViewController {
             buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             buyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             buyButton.heightAnchor.constraint(equalToConstant: 56)
-        
         ])
         
         graphView.addSubview(loader)
@@ -263,16 +262,16 @@ class DetailsViewController: UIViewController {
         ])
     }
     
-    @objc func popToPrevious(_ sender: UIBarButtonItem) {
+    @objc private func popToPrevious(_ sender: UIBarButtonItem) {
         self.navigationController?.popViewController(animated: false)
     }
     
-    @objc func addToFavorite(_ sender: UIBarButtonItem) {
+    @objc private func addToFavorite(_ sender: UIBarButtonItem) {
         presenter.stock.setFavorite()
         navigationItem.rightBarButtonItem?.tintColor = favoriteService.isFavorite(id: presenter.stock.id) ? .yellow : .lightGray
     }
     
-    func showChart (with period: DetailsModel.Period?) {
+    private func showChart(with period: DetailsModel.Period?) {
         guard let period = period else {
             return
         }
@@ -296,7 +295,6 @@ class DetailsViewController: UIViewController {
         graphView.data = LineChartData(dataSets: [lineDataSet])
         graphView.animate(xAxisDuration: 0.3, yAxisDuration: 0.2)
     }
-
 }
 
 extension DetailsViewController: DetailsViewProtocol {
@@ -304,16 +302,22 @@ extension DetailsViewController: DetailsViewProtocol {
         updateGraph(with: details)
     }
     
-    func updateView() {
-    }
-    
     func updateView(withLoader isLoading: Bool) {
         isLoading ? loader.startAnimating() : loader.stopAnimating()
     }
     
     func updateView(withError message: String) {
-        
+        let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+                    
+        let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
+                
+        errorAlert.addAction(ok)
+        self.present(errorAlert, animated: true, completion: nil)
     }
-    
-    
+}
+
+fileprivate extension UIColor {
+    enum DetailsViewController {
+        static let timeButtonColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
+    }
 }

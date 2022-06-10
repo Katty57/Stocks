@@ -8,9 +8,7 @@
 import Foundation
 import UIKit
 
-class ModuleBuilder {
-    private init () {}
-    
+final class ModuleBuilder {
     private lazy var network: NetworkService = {
         Network()
     }()
@@ -19,31 +17,7 @@ class ModuleBuilder {
     
     let favoriteService: FavoriteServiceProtocol = FavoriteService()
     
-    private func networkServie () -> NetworkService {
-        network
-    }
-    
-    private func stockService () -> StockServiceProtocol {
-        StockService(client: network)
-    }
-    
-    private func stockModule () -> UIViewController {
-        let presenter = StocksPresenter(service: stockService())
-        let view = MainScreenViewController(presenter: presenter)
-        presenter.view = view
-        
-        return view
-    }
-    
-    private func favoriteModule () -> UIViewController {
-        let presenter = FavouritesPresenter(service: stockService())
-        let view = FavoritesTableViewController(presenter: presenter)
-        presenter.view = view
-        
-        return view
-    }
-    
-    func tabBarController () -> UITabBarController {
+    func tabBarController() -> UITabBarController {
         let tabBar = UITabBarController()
         
         let mainViewNavControl = UINavigationController(rootViewController: stockModule())
@@ -59,5 +33,31 @@ class ModuleBuilder {
         favoriteViewNavControl.tabBarItem = favoriteItem
         
         return tabBar
+    }
+    
+    private init() {}
+    
+    private func networkServie() -> NetworkService {
+        network
+    }
+    
+    private func stockService() -> StockServiceProtocol {
+        StockService(client: network)
+    }
+    
+    private func stockModule() -> UIViewController {
+        let presenter = StocksPresenter(service: stockService())
+        let view = MainScreenViewController(presenter: presenter)
+        presenter.view = view
+        
+        return view
+    }
+    
+    private func favoriteModule() -> UIViewController {
+        let presenter = FavouritesPresenter(service: stockService())
+        let view = FavoritesTableViewController(presenter: presenter)
+        presenter.view = view
+        
+        return view
     }
 }

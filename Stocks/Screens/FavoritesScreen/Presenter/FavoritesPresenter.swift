@@ -7,9 +7,23 @@
 
 import Foundation
 
-final class FavouritesPresenter: StocksPresenterProtocol {
+protocol FavouritesViewProtocol {
+    func updateView()
+    func updateView(withLoader isLoading: Bool)
+    func updateView(withError message: String)
+}
+
+protocol FavoritesPresenterProtocol {
+    var view: FavouritesViewProtocol? { get set }
+    var stockCount: Int { get }
     
-    var view: StocksViewProtocol?
+    func loadView()
+    func model(for indexPah: IndexPath) -> StockModelProtocol
+}
+
+final class FavouritesPresenter: FavoritesPresenterProtocol {
+    
+    var view: FavouritesViewProtocol?
     
     private var stocks: [StockModelProtocol] = []
     

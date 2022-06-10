@@ -18,7 +18,7 @@ protocol StockModelProtocol {
     var changeColor: UIColor { get }
     var isFavorite: Bool { get set }
     
-    func setFavorite ()
+    func setFavorite()
 }
 
 final class StockModel: StockModelProtocol {

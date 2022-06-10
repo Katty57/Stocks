@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         
         window?.rootViewController = ModuleBuilder.shared.tabBarController()
-        window?.makeKeyAndVisible()// Override point for customization after application launch.
+        window?.makeKeyAndVisible()
         return true
     }
 }

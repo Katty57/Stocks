@@ -22,16 +22,6 @@ final class StockTableViewCell: UITableViewCell {
         return view
     }()
     
-    func getIndex (index: Int) {
-        if index % 2 == 0 {
-            cellView.backgroundColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
-        } else {
-            cellView.backgroundColor = .white
-        }
-        cellView.layer.cornerRadius = 12
-        cellView.clipsToBounds = true
-    }
-    
     private lazy var iconView: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
@@ -102,7 +92,23 @@ final class StockTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure (with model: StockModelProtocol) {
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        favoriteAction = nil
+    }
+    
+    func getIndex(index: Int) {
+        if index % 2 == 0 {
+            cellView.backgroundColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
+        } else {
+            cellView.backgroundColor = .white
+        }
+        cellView.layer.cornerRadius = 12
+        cellView.clipsToBounds = true
+    }
+    
+    func configure(with model: StockModelProtocol) {
         symbolLabel.text = model.symbol
         companyLabel.text = model.name
         priceLabel.text = model.price
@@ -114,18 +120,12 @@ final class StockTableViewCell: UITableViewCell {
         }
     }
     
-    @objc func favoriteButtonTapped (_ sender: UIButton) {
+    @objc private func favoriteButtonTapped(_ sender: UIButton) {
         favoriteButton.isSelected.toggle()
         favoriteAction?()
     }
     
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        
-        favoriteAction = nil
-    }
-    
-    private func setUpSubviews () {
+    private func setUpSubviews() {
         contentView.addSubview(cellView)
         
         NSLayoutConstraint.activate([

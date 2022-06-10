@@ -8,18 +8,17 @@
 import Foundation
 
 protocol StocksViewProtocol: AnyObject { //AnyObject - only reference type
-    func updateView ()
-    func updateCell (for indexPath: IndexPath)
-    func updateView (withLoader isLoading: Bool) //animation while view is loading
+    func updateView()
+    func updateCell(for indexPath: IndexPath)
+    func updateView(withLoader isLoading: Bool) //animation while view is loading
     func updateView(withError message: String)
 }
 
 protocol StocksPresenterProtocol {
     var view: StocksViewProtocol? { get set }
     var stockCount: Int { get }
-//    var stocks: [StockModelProtocol] { get }
     
-    func loadView () //tell presenter that view is loaded
+    func loadView() //tell presenter that view is loaded
     func model (for indexPah: IndexPath) -> StockModelProtocol
 }
 
