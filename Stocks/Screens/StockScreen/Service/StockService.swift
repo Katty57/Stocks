@@ -24,7 +24,6 @@ extension StockServiceProtocol {
 }
 
 final class StockService: StockServiceProtocol {
-    
     private let client: NetworkService
     
     init(client: NetworkService) {

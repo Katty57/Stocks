@@ -131,6 +131,3 @@ extension MainScreenViewController: StocksViewProtocol {
         self.present(errorAlert, animated: true, completion: nil)
     }
 }
-
-
-
