@@ -2,7 +2,7 @@
 //  Numeric+Ext.swift
 //  Stocks
 //
-//  Created by  User on 05.06.2022.
+//  Created by  User on 04.06.2022.
 //
 
 import Foundation

@@ -8,6 +8,7 @@
 import UIKit
 
 final class StockTableViewCell: UITableViewCell {
+    private var favoriteAction: (() -> Void)?
     
     static var cellIndex = 0
     
@@ -20,16 +21,6 @@ final class StockTableViewCell: UITableViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    func getIndex (index: Int) {
-        if index % 2 == 0 {
-            cellView.backgroundColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
-        } else {
-            cellView.backgroundColor = .white
-        }
-        cellView.layer.cornerRadius = 12
-        cellView.clipsToBounds = true
-    }
     
     private lazy var iconView: UIImageView = {
         let image = UIImageView()
@@ -54,18 +45,18 @@ final class StockTableViewCell: UITableViewCell {
         return label
     }()
     
-    private lazy var favouriteButton: UIButton = {
+    private lazy var favoriteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "Path"), for: .normal)
+        button.setImage(UIImage(named: "star_off"), for: .normal)
+        button.setImage(UIImage(named: "star_on"), for: .selected)
+        button.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     private lazy var infoView: UIView = {
         let view = UIView()
-        view.addSubview(symbolLabel)
-        view.addSubview(companyLabel)
-        view.addSubview(favouriteButton)
+        [symbolLabel, companyLabel, favoriteButton].forEach { view.addSubview($0) }
         return view
     }()
     
@@ -101,19 +92,40 @@ final class StockTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configure (with stock: Stock) {
-        symbolLabel.text = stock.symbol
-        companyLabel.text = stock.name
-        priceLabel.text = (stock.price).formattedWithSeparator
-        if (stock.change).sign == .minus {
-            changePriceLabel.textColor = .red
-        } else {
-            changePriceLabel.textColor = UIColor(red: 0.14, green: 0.7, blue: 0.36, alpha: 1.0)
-        }
-        changePriceLabel.text = (stock.change).formattedWithSeparator + " (" + (stock.changePercentage).formattedWithSeparator + "%)"
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        favoriteAction = nil
     }
     
-    private func setUpSubviews () {
+    func getIndex(index: Int) {
+        if index % 2 == 0 {
+            cellView.backgroundColor = UIColor(red: 0.94, green: 0.96, blue: 0.97, alpha: 1.0)
+        } else {
+            cellView.backgroundColor = .white
+        }
+        cellView.layer.cornerRadius = 12
+        cellView.clipsToBounds = true
+    }
+    
+    func configure(with model: StockModelProtocol) {
+        symbolLabel.text = model.symbol
+        companyLabel.text = model.name
+        priceLabel.text = model.price
+        changePriceLabel.text = model.change
+        changePriceLabel.textColor = model.changeColor
+        favoriteButton.isSelected = model.isFavorite
+        favoriteAction = {
+            model.setFavorite()
+        }
+    }
+    
+    @objc private func favoriteButtonTapped(_ sender: UIButton) {
+        favoriteButton.isSelected.toggle()
+        favoriteAction?()
+    }
+    
+    private func setUpSubviews() {
         contentView.addSubview(cellView)
         
         NSLayoutConstraint.activate([
@@ -137,10 +149,10 @@ final class StockTableViewCell: UITableViewCell {
             symbolLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor),
             
             companyLabel.leadingAnchor.constraint(equalTo: infoView.leadingAnchor),
-            companyLabel.topAnchor.constraint(equalTo: favouriteButton.bottomAnchor, constant: 5),
+            companyLabel.topAnchor.constraint(equalTo: favoriteButton.bottomAnchor, constant: 5),
             
-            favouriteButton.topAnchor.constraint(equalTo: symbolLabel.topAnchor),
-            favouriteButton.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6),
+            favoriteButton.topAnchor.constraint(equalTo: symbolLabel.topAnchor),
+            favoriteButton.leadingAnchor.constraint(equalTo: symbolLabel.trailingAnchor, constant: 6),
             
             digitView.topAnchor.constraint(equalTo: cellView.topAnchor, constant: 14),
             digitView.trailingAnchor.constraint(equalTo: cellView.trailingAnchor, constant: -12),
@@ -154,5 +166,4 @@ final class StockTableViewCell: UITableViewCell {
             changePriceLabel.trailingAnchor.constraint(equalTo: priceLabel.trailingAnchor)
         ])
     }
-
 }

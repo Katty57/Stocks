@@ -2,7 +2,7 @@
 //  StockResponse.swift
 //  Stocks
 //
-//  Created by  User on 05.06.2022.
+//  Created by  User on 04.06.2022.
 //
 
 import Foundation
@@ -21,6 +21,5 @@ struct Stock: Decodable {
         case price = "current_price"
         case change = "price_change_24h"
         case changePercentage = "price_change_percentage_24h"
-        
     }
 }
