@@ -105,7 +105,7 @@ extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
         let presenter = DetailsPresenter(stock: self.presenter.model(for: indexPath))
         let vc = DetailsViewController(presenter: presenter)
         presenter.view = vc
-        
+        tableView.deselectRow(at: indexPath, animated: true)
         self.navigationController?.pushViewController(vc, animated: false)
     }
 }
