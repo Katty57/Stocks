@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 final class ModuleBuilder {
-    private init() {}
     
     private lazy var network: NetworkService = {
         Network()
@@ -18,14 +17,6 @@ final class ModuleBuilder {
     static let shared: ModuleBuilder = .init()
     
     let favoriteService: FavoriteServiceProtocol = FavoriteService()
-    
-    private func networkServie() -> NetworkService {
-        network
-    }
-    
-    private func stockService() -> StockServiceProtocol {
-        StockService(client: network)
-    }
     
     func tabBarController() -> UITabBarController {
         let tabBar = UITabBarController()
@@ -47,6 +38,16 @@ final class ModuleBuilder {
         searchNavControl.tabBarItem = searchItem
         
         return tabBar
+    }
+    
+    private init() {}
+    
+    private func networkServie() -> NetworkService {
+        network
+    }
+    
+    private func stockService() -> StockServiceProtocol {
+        StockService(client: network)
     }
     
     private func stockModule() -> UIViewController {

@@ -86,7 +86,6 @@ final class MainScreenViewController: UIViewController {
             loader.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
-
 }
 
 extension MainScreenViewController: UITableViewDataSource, UITableViewDelegate {
@@ -125,13 +124,9 @@ extension MainScreenViewController: StocksViewProtocol {
     
     func updateView(withError message: String) {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
         
         errorAlert.addAction(ok)
         self.present(errorAlert, animated: true, completion: nil)
     }
 }
-
-
-

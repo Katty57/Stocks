@@ -21,6 +21,5 @@ struct Stock: Decodable {
         case price = "current_price"
         case change = "price_change_24h"
         case changePercentage = "price_change_percentage_24h"
-        
     }
 }

@@ -53,6 +53,7 @@ extension Router {
         return request
     }
 
+
     private func addParameters(to request: inout URLRequest) throws {
         guard let url = request.url else { throw NetworkError.missingURL }
         

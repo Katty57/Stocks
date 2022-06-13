@@ -254,7 +254,6 @@ final class DetailsViewController: UIViewController {
             buyButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             buyButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20),
             buyButton.heightAnchor.constraint(equalToConstant: 56)
-        
         ])
         
         graphView.addSubview(loader)
@@ -297,7 +296,6 @@ final class DetailsViewController: UIViewController {
         graphView.data = LineChartData(dataSets: [lineDataSet])
         graphView.animate(xAxisDuration: 0.3, yAxisDuration: 0.2)
     }
-
 }
 
 extension DetailsViewController: DetailsViewProtocol {
@@ -317,8 +315,6 @@ extension DetailsViewController: DetailsViewProtocol {
         errorAlert.addAction(ok)
         self.present(errorAlert, animated: true, completion: nil)
     }
-    
-    
 }
 
 fileprivate extension UIColor {

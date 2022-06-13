@@ -32,7 +32,7 @@ final class FavoritesTableViewController: UIViewController {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
+
     init(presenter: FavoritesPresenterProtocol) {
         self.presenter = presenter
         
@@ -116,7 +116,6 @@ extension FavoritesTableViewController: SearchViewProtocol {
     
     func updateView(withError message: String) {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-            
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
         
         errorAlert.addAction(ok)
