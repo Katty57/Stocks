@@ -15,4 +15,3 @@ extension Formatter {
         return formatter
     }()
 }
-

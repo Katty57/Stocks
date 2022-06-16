@@ -1,51 +1,52 @@
 //
-//  FavoritesPresenter.swift
+//  SearchPresenter.swift
 //  Stocks
 //
-//  Created by  User on 07.06.2022.
+//  Created by  User on 10.06.2022.
 //
 
 import Foundation
 
-protocol FavoritesPresenterProtocol {
+protocol SearchViewProtocol: AnyObject {
+    func updateView()
+    func updateView(withLoader isLoading: Bool)
+    func updateView(withError message: String)
+}
+
+protocol SearchPresenterProtocol {
     var view: SearchViewProtocol? { get set }
+    var stocks: [StockModelProtocol] { get }
     var stockCount: Int { get }
     
-    func loadView()
+    func loadView(with substring: String?)
     func model(for indexPah: IndexPath) -> StockModelProtocol
 }
 
-final class FavouritesPresenter: FavoritesPresenterProtocol {
+final class SearchPresenter: SearchPresenterProtocol {
     
-    var view: SearchViewProtocol?
-    
-    private var stocks: [StockModelProtocol] = []
+    weak var view: SearchViewProtocol?
     
     private let service: StockServiceProtocol?
     
-    private var favouriteService: FavoriteServiceProtocol = ModuleBuilder.shared.favoriteService
-    
-    init(service: StockServiceProtocol? = nil) {
-        self.service = service
-    }
+    var stocks: [StockModelProtocol] = []
     
     var stockCount: Int {
         stocks.count
     }
     
-    func loadView() {
-        startFavouritesNotificationObserving()
+    init(service: StockServiceProtocol? = nil) {
+        self.service = service
+    }
+    
+    func loadView(with substring: String?) {
         
         view?.updateView(withLoader: true)
         service?.getStocks {[weak self] result in
             self?.view?.updateView(withLoader: false)
-            
             switch result{
             case .success(let stocks):
-                let favouriteIds = self?.favouriteService.getFavouriteIds()
                 self?.stocks = stocks.compactMap ({stock in
-                    guard let ids = favouriteIds else {return nil}
-                    if ids.contains(stock.id) {
+                    if let substr = substring, stock.symbol.contains(substr.lowercased()) {
                         return stock
                     }
                     return nil
@@ -58,13 +59,6 @@ final class FavouritesPresenter: FavoritesPresenterProtocol {
     }
     
     func model(for indexPah: IndexPath) -> StockModelProtocol {
-        return stocks[indexPah.row]
-    }
-}
-
-extension FavouritesPresenter: FavoritesUpdateServiceProtocol {
-    func setFavourite(notification: Notification) {
-        loadView()
-        view?.updateView()
+        stocks[indexPah.row]
     }
 }

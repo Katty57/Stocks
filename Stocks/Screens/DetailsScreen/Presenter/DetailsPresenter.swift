@@ -36,7 +36,6 @@ final class DetailsPresenter: DetailsPresenterProtocol {
         view?.updateView(withLoader: true)
         service.getDetails(id: stock.id) { [weak self] result in
             self?.view?.updateView(withLoader: false)
-            
             switch result {
             case .success(let details):
                 self?.view?.updateView(with: .build(from: details))

@@ -27,7 +27,6 @@ final class StockTableViewCell: UITableViewCell {
         image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 12
         image.clipsToBounds = true
-        image.image = UIImage(named: "YNDX")
         return image
     }()
     
@@ -115,6 +114,7 @@ final class StockTableViewCell: UITableViewCell {
         changePriceLabel.text = model.change
         changePriceLabel.textColor = model.changeColor
         favoriteButton.isSelected = model.isFavorite
+        iconView.setImage(source: model.imageURL, placeholder: "photo")
         favoriteAction = {
             model.setFavorite()
         }

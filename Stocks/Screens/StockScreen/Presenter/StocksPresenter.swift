@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol StocksViewProtocol: AnyObject { //AnyObject - only reference type
     func updateView()
@@ -19,7 +20,7 @@ protocol StocksPresenterProtocol {
     var stockCount: Int { get }
     
     func loadView() //tell presenter that view is loaded
-    func model (for indexPah: IndexPath) -> StockModelProtocol
+    func model(for indexPah: IndexPath) -> StockModelProtocol
 }
 
 final class StocksPresenter: StocksPresenterProtocol {
@@ -42,12 +43,12 @@ final class StocksPresenter: StocksPresenterProtocol {
         startFavouritesNotificationObserving()
         
         view?.updateView(withLoader: true)
-        service?.getStocks {[weak self] result in
+        self.service?.getStocks {[weak self] result in
             self?.view?.updateView(withLoader: false)
             
             switch result{
             case .success(let stocks):
-                self?.stocks = stocks.map {StockModel(stock: $0)}
+                self?.stocks = stocks
                 self?.view?.updateView()
             case .failure(let error):
                 self?.view?.updateView(withError: error.localizedDescription)

@@ -23,7 +23,7 @@ struct Details: Decodable {
                 throw NSError(domain: "Bad model from json", code: 500, userInfo: nil)
             }
             
-            self.date = Date(timeIntervalSince1970: TimeInterval(date))
+            self.date = Date(timeIntervalSince1970: (date / 1000.0))
             self.price = price
         }
     }

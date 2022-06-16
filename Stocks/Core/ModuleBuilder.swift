@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 final class ModuleBuilder {
+    
     private lazy var network: NetworkService = {
         Network()
     }()
@@ -22,15 +23,19 @@ final class ModuleBuilder {
         
         let mainViewNavControl = UINavigationController(rootViewController: stockModule())
         let favoriteViewNavControl = UINavigationController(rootViewController: favoriteModule())
+        let searchNavControl = UINavigationController(rootViewController: searchModule())
         
         let mainBarItem = UITabBarItem()
         mainBarItem.image = UIImage(named: "diagram")
         let favoriteItem = UITabBarItem()
-        favoriteItem.image = UIImage(named: "star")
+        favoriteItem.image = UIImage(named: "favorite")
+        let searchItem = UITabBarItem()
+        searchItem.image = UIImage(named: "search")
         
-        tabBar.viewControllers = [mainViewNavControl, favoriteViewNavControl]
+        tabBar.viewControllers = [mainViewNavControl, favoriteViewNavControl, searchNavControl]
         mainViewNavControl.tabBarItem = mainBarItem
         favoriteViewNavControl.tabBarItem = favoriteItem
+        searchNavControl.tabBarItem = searchItem
         
         return tabBar
     }
@@ -56,6 +61,14 @@ final class ModuleBuilder {
     private func favoriteModule() -> UIViewController {
         let presenter = FavouritesPresenter(service: stockService())
         let view = FavoritesTableViewController(presenter: presenter)
+        presenter.view = view
+        
+        return view
+    }
+    
+    private func searchModule() -> UIViewController {
+        let presenter = SearchPresenter(service: stockService())
+        let view = SearchViewController(presenter: presenter)
         presenter.view = view
         
         return view

@@ -15,16 +15,11 @@ final class DetailsViewController: UIViewController {
     let favoriteService: FavoriteServiceProtocol = ModuleBuilder.shared.favoriteService
     
     var periodIndex: Int?
-
-    private lazy var navBarTitleView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .green
-        return view
-    }()
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Montserrat-Bold", size: 18)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -32,6 +27,7 @@ final class DetailsViewController: UIViewController {
     private lazy var companyLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Montserrat-SemiBold", size: 12)
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -159,6 +155,11 @@ final class DetailsViewController: UIViewController {
         setUpView()
         setUpSubviews()
         configure()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
         presenter.loadView()
     }
     
@@ -166,7 +167,7 @@ final class DetailsViewController: UIViewController {
         view.backgroundColor = .white
         self.tabBarController?.tabBar.isHidden = true
         
-        navigationItem.titleView = titleView
+        self.navigationItem.titleView = titleView
         
         let leftBarButton = UIBarButtonItem(image: UIImage(named: "backButton"), style: .plain, target: self, action: #selector(popToPrevious))
         self.navigationItem.leftBarButtonItem = leftBarButton
@@ -308,9 +309,9 @@ extension DetailsViewController: DetailsViewProtocol {
     
     func updateView(withError message: String) {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                    
+        
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
+        
         errorAlert.addAction(ok)
         self.present(errorAlert, animated: true, completion: nil)
     }

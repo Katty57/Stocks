@@ -48,6 +48,7 @@ final class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         
         setUpView()
+        presenter.loadView()
         setUpSubviews() 
     }
     
@@ -55,7 +56,6 @@ final class MainScreenViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-        presenter.loadView()
     }
     
     private func setUpView() {
@@ -68,8 +68,8 @@ final class MainScreenViewController: UIViewController {
     
     private func setUpSubviews() {
         view.addSubview(spaceTableView)
-        spaceTableView.addSubview(tableView)
         view.addSubview(loader)
+        spaceTableView.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             spaceTableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -124,9 +124,8 @@ extension MainScreenViewController: StocksViewProtocol {
     
     func updateView(withError message: String) {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                    
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
+        
         errorAlert.addAction(ok)
         self.present(errorAlert, animated: true, completion: nil)
     }

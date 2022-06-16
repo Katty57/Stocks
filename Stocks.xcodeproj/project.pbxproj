@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CE160F8E2853074D0098ACC2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8D2853074C0098ACC2 /* SearchViewController.swift */; };
+		CE160F90285328110098ACC2 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE160F8F285328110098ACC2 /* SearchPresenter.swift */; };
+		CE18029C28526E4C001890AC /* UIImageView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE18029B28526E4C001890AC /* UIImageView+Ext.swift */; };
+		CE18029F285273C0001890AC /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CE18029E285273C0001890AC /* Kingfisher */; };
 		CE1970D4284FA9F700FA8432 /* FavoritesUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1970D3284FA9F700FA8432 /* FavoritesUpdateService.swift */; };
 		CE1970D7284FC74400FA8432 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE1970D6284FC74400FA8432 /* FavoritesPresenter.swift */; };
 		CE3CB310284CC87D00B189A9 /* DetailsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE3CB30F284CC87D00B189A9 /* DetailsResponse.swift */; };
@@ -40,6 +44,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		CE160F8D2853074C0098ACC2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		CE160F8F285328110098ACC2 /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		CE18029B28526E4C001890AC /* UIImageView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Ext.swift"; sourceTree = "<group>"; };
 		CE1970D3284FA9F700FA8432 /* FavoritesUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesUpdateService.swift; sourceTree = "<group>"; };
 		CE1970D6284FC74400FA8432 /* FavoritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesPresenter.swift; sourceTree = "<group>"; };
 		CE3CB30F284CC87D00B189A9 /* DetailsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsResponse.swift; sourceTree = "<group>"; };
@@ -78,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE18029F285273C0001890AC /* Kingfisher in Frameworks */,
 				CEF4BB892850911F0043B59E /* Charts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -85,6 +93,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE160F8A285307080098ACC2 /* SearchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				CE160F8C285307230098ACC2 /* View */,
+				CE160F8B2853071C0098ACC2 /* Presenter */,
+			);
+			path = SearchScreen;
+			sourceTree = "<group>";
+		};
+		CE160F8B2853071C0098ACC2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				CE160F8F285328110098ACC2 /* SearchPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		CE160F8C285307230098ACC2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				CE160F8D2853074C0098ACC2 /* SearchViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		CE1970D5284FC73100FA8432 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,6 +164,7 @@
 		CE49720D2840133C007BB7CA /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				CE160F8A285307080098ACC2 /* SearchScreen */,
 				CE70AE24284E8D3D0059AF0C /* FavoritesScreen */,
 				CEF78A3628415844005906F9 /* DetailsScreen */,
 				CE49720F284013B6007BB7CA /* StockScreen */,
@@ -215,6 +249,7 @@
 			isa = PBXGroup;
 			children = (
 				CED073F9284B84BB002AD3C7 /* NSObject+Ext.swift */,
+				CE18029B28526E4C001890AC /* UIImageView+Ext.swift */,
 				CED073FD284B850C002AD3C7 /* Numeric+Ext.swift */,
 				CED073FB284B84F7002AD3C7 /* Formatter+Ext.swift */,
 			);
@@ -332,6 +367,7 @@
 			name = Stocks;
 			packageProductDependencies = (
 				CEF4BB882850911F0043B59E /* Charts */,
+				CE18029E285273C0001890AC /* Kingfisher */,
 			);
 			productName = Stocks;
 			productReference = CED838F8283CB2EE00608B2E /* Stocks.app */;
@@ -363,6 +399,7 @@
 			mainGroup = CED838EF283CB2EE00608B2E;
 			packageReferences = (
 				CEF4BB872850911E0043B59E /* XCRemoteSwiftPackageReference "Charts" */,
+				CE18029D285273C0001890AC /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = CED838F9283CB2EE00608B2E /* Products */;
 			projectDirPath = "";
@@ -395,11 +432,14 @@
 				CE70AE1D284E6C760059AF0C /* FavoritesService.swift in Sources */,
 				CED07410284BEA10002AD3C7 /* DetailsService.swift in Sources */,
 				CED073FA284B84BB002AD3C7 /* NSObject+Ext.swift in Sources */,
+				CE160F8E2853074D0098ACC2 /* SearchViewController.swift in Sources */,
 				CED07404284B8EE2002AD3C7 /* StockResponse.swift in Sources */,
 				CEF78A0C2840BB8B005906F9 /* NetworkService.swift in Sources */,
+				CE160F90285328110098ACC2 /* SearchPresenter.swift in Sources */,
 				CE70AE27284E8D600059AF0C /* FavoritesTableViewController.swift in Sources */,
 				CEF78A0A2840BB60005906F9 /* Router.swift in Sources */,
 				CEF78A392841586F005906F9 /* DetailsViewController.swift in Sources */,
+				CE18029C28526E4C001890AC /* UIImageView+Ext.swift in Sources */,
 				CE3CB310284CC87D00B189A9 /* DetailsResponse.swift in Sources */,
 				CEF78A142840C2E9005906F9 /* StockService.swift in Sources */,
 				CED073FE284B850C002AD3C7 /* Numeric+Ext.swift in Sources */,
@@ -628,6 +668,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		CE18029D285273C0001890AC /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		CEF4BB872850911E0043B59E /* XCRemoteSwiftPackageReference "Charts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielgindi/Charts.git";
@@ -639,6 +687,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CE18029E285273C0001890AC /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CE18029D285273C0001890AC /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		CEF4BB882850911F0043B59E /* Charts */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CEF4BB872850911E0043B59E /* XCRemoteSwiftPackageReference "Charts" */;

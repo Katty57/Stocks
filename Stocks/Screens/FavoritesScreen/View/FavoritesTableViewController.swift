@@ -42,11 +42,12 @@ final class FavoritesTableViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setUpView()
+        presenter.loadView()
         setUpSubviews()
     }
     
@@ -54,7 +55,6 @@ final class FavoritesTableViewController: UIViewController {
         super.viewWillAppear(animated)
         
         self.tabBarController?.tabBar.isHidden = false
-        presenter.loadView()
     }
     
     private func setUpView() {
@@ -70,8 +70,8 @@ final class FavoritesTableViewController: UIViewController {
     
     private func setUpSubviews() {
         view.addSubview(spaceTableView)
-        spaceTableView.addSubview(tableView)
         view.addSubview(loader)
+        spaceTableView.addSubview(tableView)
         
         NSLayoutConstraint.activate([
             spaceTableView.topAnchor.constraint(equalTo: view.topAnchor),
@@ -104,7 +104,8 @@ extension FavoritesTableViewController: UITableViewDataSource {
     }
 }
 
-extension FavoritesTableViewController: FavouritesViewProtocol {
+extension FavoritesTableViewController: SearchViewProtocol {
+    
     func updateView() {
         tableView.reloadData()
     }
@@ -115,9 +116,8 @@ extension FavoritesTableViewController: FavouritesViewProtocol {
     
     func updateView(withError message: String) {
         let errorAlert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-                    
         let ok = UIAlertAction(title: "OK", style: .default, handler: nil)
-                
+        
         errorAlert.addAction(ok)
         self.present(errorAlert, animated: true, completion: nil)
     }
